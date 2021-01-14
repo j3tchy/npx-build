@@ -1,14 +1,13 @@
 #!/usr/bin/env node
-const spinner = require('cli-spinners');
-const { exit } = require('process');
-
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 const logUpdate = require('log-update');
+const spinner = require('cli-spinners');
+const { exit } = require('process');
+const fs = require('fs');
 
-
-let appName = process.argv[2];
-let appDirectory = `${process.cwd()}/${appName}`;
+const appName = process.argv[2];
+const appDirectory = `${process.cwd()}/${appName}`;
 
 const makeDir = async () => {
     const { stderr } = await exec(`mkdir ${appName}`);
@@ -34,7 +33,7 @@ const packStarterKit = () => {
 
 const getVersion = async () => {
     const { stdout: versionNumber } = await exec(`npm show @halo/starter-kit version`);
-    console.log(`Retrieving latest ICDS starter kit version`);
+    console.log(`Retrieving latest ICDS Starter Kit version`);
     return versionNumber.trim();
 }
 
@@ -83,6 +82,11 @@ const installPackages = async () => {
 }
 
 async function run() {
+    if (fs.existsSync(appDirectory)) {
+        console.log('Unable to create project. Directory already exists');
+        exit(1);
+    }
+
     const latestVersion = await getVersion();
 
     makeDir();
@@ -95,6 +99,7 @@ async function run() {
             });
         });
     })
+
 }
 
 run();
