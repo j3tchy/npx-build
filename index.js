@@ -68,11 +68,11 @@ const installPackages = async () => {
     let i = 0;
     
     console.log('Installing starter-kit packages:');
-    
-    for (let [key, value] of pkgJson.dependancies) {
-        console.log(`${key}@${value}`);
-    }
 
+    Object.entries(pkgJson.dependencies).forEach(([key, value]) => {
+        console.log(`${key}@${value}`);
+      });
+    
     setInterval(() => {
         const { frames } = spinner.dots;
         logUpdate(frames[i = ++i % frames.length])
