@@ -1,0 +1,22 @@
+{
+  "name": "npxLyfe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "icds-starter-kit": "index.js"
+  },
+  "devDependencies": {
+    "eslint": "^7.17.0"
+  },
+  "dependencies": {
+    "cli-spinners": "^2.5.0",
+    "log-update": "^4.0.0"
+  }
+}
