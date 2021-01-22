@@ -64,7 +64,7 @@ const cleanUpDir = async (versionNumber) => {
 }
 
 const installPackages = async () => {
-    const pkgJson = require(`${appDirectory}\package.json`);
+    const pkgJson = require(`${appDirectory}/package.json`);
     let i = 0;
     
     console.log('Installing starter-kit packages:');
