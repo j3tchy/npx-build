@@ -87,19 +87,23 @@ async function run() {
         exit(1);
     }
 
+    if (!appName) {
+        console.log('Please add a name for your project');
+        exit(1);
+    }
+
     const latestVersion = await getVersion();
 
     makeDir();
-    packStarterKit().then(() => {
-        unzipStarterKit(latestVersion).then(() => {
-            copyStarterKitToProjectRoot().then(() => {
-                cleanUpDir(latestVersion).then(() => {
-                    installPackages();
-                });
-            });
-        });
-    })
-
+    packStarterKit()
+        .then(() => unzipStarterKit(latestVersion))
+        .then(() => copyStarterKitToProjectRoot())
+        .then(() => cleanUpDir(latestVersion))
+        .then(() => installPackages());
 }
 
-run();
+try {
+    run();
+} catch (e) {
+    console.log('Error setting up starter kit', e);
+}
