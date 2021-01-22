@@ -64,10 +64,15 @@ const cleanUpDir = async (versionNumber) => {
 }
 
 const installPackages = async () => {
+    const pkgJson = require(`${appDirectory}\package.json`);
     let i = 0;
     
-    console.log('Installing starter-kit packages');
+    console.log('Installing starter-kit packages:');
 
+    Object.entries(pkgJson.dependencies).forEach(([key, value]) => {
+        console.log(`${key}@${value}`);
+      });
+    
     setInterval(() => {
         const { frames } = spinner.dots;
         logUpdate(frames[i = ++i % frames.length])
